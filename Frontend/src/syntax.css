@@ -1,0 +1,190 @@
+/*
+ * Syntax colouring for both code surfaces.
+ *
+ * The app ships its own palette instead of prism-tomorrow + github-dark: those
+ * two stylesheets both match on `class*="language-"`, so the editor theme was
+ * leaking into the review's fenced blocks and forcing every token grey. Keeping
+ * one file here lets the editor and the review use the same palette, and lets
+ * the review override it freely.
+ */
+
+/* ---------------------------------------------------------------- editor -- */
+
+.editor {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+/*
+ * react-simple-code-editor renders the highlighted <pre> as the only in-flow
+ * child, so it has to paint the full editor surface instead of shrinking to
+ * the code. Type metrics are inherited from .editor so the transparent
+ * textarea on top stays perfectly aligned with the highlighted lines.
+ */
+.editor pre[class*="language-"] {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  color: #e5e7f0;
+  text-align: left;
+  white-space: pre;
+  word-wrap: normal;
+  overflow: auto;
+  caret-color: var(--color-accent);
+}
+
+.editor textarea {
+  caret-color: var(--color-accent);
+}
+
+.editor .token.comment,
+.editor .token.prolog,
+.editor .token.doctype,
+.editor .token.cdata {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.editor .token.punctuation {
+  color: #8b90a0;
+}
+
+.editor .token.property,
+.editor .token.tag,
+.editor .token.constant,
+.editor .token.symbol,
+.editor .token.deleted,
+.editor .token.attr-name {
+  color: #f0abfc;
+}
+
+.editor .token.boolean,
+.editor .token.number {
+  color: #fcd34d;
+}
+
+.editor .token.selector,
+.editor .token.attr-value,
+.editor .token.string,
+.editor .token.char,
+.editor .token.builtin,
+.editor .token.inserted {
+  color: #86efac;
+}
+
+.editor .token.operator,
+.editor .token.entity,
+.editor .token.url {
+  color: #c4b5fd;
+}
+
+.editor .token.atrule,
+.editor .token.keyword {
+  color: #c4b5fd;
+  font-weight: 500;
+}
+
+.editor .token.function,
+.editor .token.class-name {
+  color: #93c5fd;
+}
+
+.editor .token.regex,
+.editor .token.important,
+.editor .token.variable {
+  color: #fda4af;
+}
+
+.editor .token.important,
+.editor .token.bold {
+  font-weight: 600;
+}
+
+.editor .token.italic {
+  font-style: italic;
+}
+
+/* ------------------------------------------------------- review blocks -- */
+
+.review-prose .hljs {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: transparent;
+  color: #e5e7f0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  background-clip: padding-box;
+}
+
+.review-prose .hljs-comment,
+.review-prose .hljs-quote {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.review-prose .hljs-punctuation,
+.review-prose .hljs-bullet {
+  color: #8b90a0;
+}
+
+.review-prose .hljs-keyword,
+.review-prose .hljs-selector-tag,
+.review-prose .hljs-literal,
+.review-prose .hljs-section,
+.review-prose .hljs-doctag,
+.review-prose .hljs-name,
+.review-prose .hljs-strong {
+  color: #c4b5fd;
+  font-weight: 500;
+}
+
+.review-prose .hljs-string,
+.review-prose .hljs-regexp,
+.review-prose .hljs-addition,
+.review-prose .hljs-symbol,
+.review-prose .hljs-bullet {
+  color: #86efac;
+}
+
+.review-prose .hljs-number,
+.review-prose .hljs-meta {
+  color: #fcd34d;
+}
+
+.review-prose .hljs-title,
+.review-prose .hljs-title.function_,
+.review-prose .hljs-title.class_,
+.review-prose .hljs-built_in,
+.review-prose .hljs-type,
+.review-prose .hljs-class .hljs-title,
+.review-prose .hljs-selector-id {
+  color: #93c5fd;
+}
+
+.review-prose .hljs-attr,
+.review-prose .hljs-attribute,
+.review-prose .hljs-variable,
+.review-prose .hljs-template-variable,
+.review-prose .hljs-params,
+.review-prose .hljs-selector-attr,
+.review-prose .hljs-selector-pseudo,
+.review-prose .hljs-link {
+  color: #f0abfc;
+}
+
+.review-prose .hljs-meta-keyword,
+.review-prose .hljs-meta-string {
+  color: #7dd3fc;
+}
+
+.review-prose .hljs-deletion {
+  color: #f87171;
+}
+
+.review-prose .hljs-emphasis {
+  font-style: italic;
+}
